@@ -1,14 +1,17 @@
 
 
 import './App.css'
+import Login from './auth/Login'
 
 function App() {
   
 
   return (
-    <>
-      <button className='bg-orange hover:bg-hoverOrange '> let we food</button>
-    </>
+    <main>
+      <Login/>
+    </main>
+      
+    
   )
 }
 
