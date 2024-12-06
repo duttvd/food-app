@@ -2,7 +2,8 @@ import "./App.css";
 import Login from "./auth/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./auth/Signup";
-import MainLayout from "./MainLayout"; // Corrected typo
+import MainLayout from "./MainLayout";
+import ForgotPassword from "./auth/ForgotPassword";
 
 const appRouter = createBrowserRouter([
   {
@@ -17,18 +18,22 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login />
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <Signup />
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />
   },
 ]);
 
 function App() {
   return (
     <main>
-      <RouterProvider router={appRouter} />
+      <RouterProvider router={appRouter} />,
     </main>
   );
 }

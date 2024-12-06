@@ -6,6 +6,7 @@ import { LoginInputState, userLoginSchema } from "@/schema/UserSchema";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import ForgotPassword from "./ForgotPassword";
 
 // type LoginInputState = {
 //   email: string;
@@ -88,6 +89,10 @@ const Login = () => {
               Login
             </button>
           )}
+          <div className="pt-4">
+            <Link to="/forgot-password" className="text-blue-500 hover:text-red-400 hover:underline">Forgot Password</Link>
+          </div>
+
         </div>
         <Separator />
         <p className="mt-2">
@@ -102,7 +107,3 @@ const Login = () => {
 };
 
 export default Login;
-function setErrors(arg0: Partial<{ email: string; password: string; }>) {
-  throw new Error("Function not implemented.");
-}
-
