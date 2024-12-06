@@ -1,30 +1,78 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { LoginInputState, userLoginSchema } from "@/schema/UserSchema";
+
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
+// type LoginInputState = {
+//   email: string;
+//   password: string;
+// };
 
 const Login = () => {
-  const loading = true;
+  const [input, setInput] = useState<LoginInputState>({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState<Partial<LoginInputState>>({});
+  const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+
+  const loginSubmitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    const result = userLoginSchema.safeParse(input); // Fixed: Validate the `input` state
+    if (!result.success) {
+      const fieldErrors = result.error.formErrors.fieldErrors;
+      setErrors(fieldErrors as Partial<LoginInputState>);
+      return;
+    }
+    console.log(input);
+  };
+
+  const loading = false;
+
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <form className="md:p-8 w-full max-w-md rounded-lg md:border border-gray-200 mx-4">
+      <form
+        onSubmit={loginSubmitHandler}
+        className="md:p-8 w-full h-full max-w-md rounded-lg md:border border-gray-200 mx-4"
+      >
         <div className="md-4">
           <h1 className="font-bold text-2xl">PateEats</h1>
         </div>
         <div className="mb-4">
           <div className="relative">
             <Label>Email</Label>
-            <Input type="email" placeholder="Email" className="pl-10 focus-visible:ring-1" />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={input.email}
+              onChange={changeEventHandler}
+              className="pl-10 focus-visible:ring-1"
+            />
             <Mail className="absolute inset-8 left-2 text-gray-500 pointer-events-none" />
+            {errors && <span className="text-xs text-red-500">{errors.email}</span>}
           </div>
         </div>
         <div className="mb-4">
           <div className="relative">
             <Label>Password</Label>
-            <Input type="password" placeholder="Password" className="pl-10 focus-visible:ring-1" />
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={input.password}
+              onChange={changeEventHandler}
+              className="pl-10 focus-visible:ring-1"
+            />
             <LockKeyhole className="absolute inset-8 left-2 text-gray-500 pointer-events-none" />
+            {errors && <span className="text-xs text-red-500">{errors.password}</span>}
           </div>
         </div>
         <div className="mb-10">
@@ -33,7 +81,12 @@ const Login = () => {
               <Loader2 className="mr-2 h-4 w-full animate-spin" /> Please wait
             </button>
           ) : (
-            <button className="bg-orange hover:bg-hoverOrange text-white rounded-md w-full">Login</button>
+            <button
+              type="submit"
+              className="bg-orange hover:bg-hoverOrange text-white rounded-md w-full"
+            >
+              Login
+            </button>
           )}
         </div>
         <Separator />
@@ -49,4 +102,7 @@ const Login = () => {
 };
 
 export default Login;
+function setErrors(arg0: Partial<{ email: string; password: string; }>) {
+  throw new Error("Function not implemented.");
+}
 

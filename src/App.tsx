@@ -2,32 +2,28 @@ import "./App.css";
 import Login from "./auth/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./auth/Signup";
-import MainLayout from "./MainLayout";
+import MainLayout from "./MainLayout"; // Corrected typo
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Login />,
-      }
-    ]
-
-
+    // children: [
+    //   {
+    //     path: "/login",
+    //     element: <Login />,
+    //   }
+    // ]
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: <Signup />
+    element: <Signup />,
   },
-
-
-])
+]);
 
 function App() {
   return (
