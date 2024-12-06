@@ -23,13 +23,13 @@ const Signup = () => {
 
   const signupSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
-    const result = userSignupSchema.safeParse(input); // Fixed: Validate the `input` state
+    const result = userSignupSchema.safeParse(input);
     if (!result.success) {
       const fieldErrors = result.error.formErrors.fieldErrors;
       setErrors(fieldErrors as Partial<SignupInputState>);
       return;
     }
-    console.log(input); // Logs validated input
+    console.log(input);
   };
 
   const loading = false;
@@ -44,7 +44,7 @@ const Signup = () => {
           <h1 className="font-bold text-2xl">PateEats</h1>
         </div>
 
-        {/* Full Name Field */}
+
         <div className="mb-4">
           <div className="relative">
             <Label>Full Name</Label>
@@ -61,7 +61,7 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Email Field */}
+
         <div className="mb-4">
           <div className="relative">
             <Label>Email</Label>
@@ -78,7 +78,7 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Password Field */}
+
         <div className="mb-4">
           <div className="relative">
             <Label>Password</Label>
@@ -95,12 +95,12 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Contact Field */}
+
         <div className="mb-4">
           <div className="relative">
             <Label>Contact</Label>
             <Input
-              type="text" // Fixed type to match validation
+              type="text"
               name="contact"
               placeholder="Contact"
               value={input.contact}
@@ -112,7 +112,7 @@ const Signup = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
+
         <div className="mb-10">
           {loading ? (
             <button className="bg-orange hover:bg-hoverOrange text-white rounded-md w-full h-full">
