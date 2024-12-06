@@ -8,7 +8,7 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
     const loading = false;
     return (
-        <div className="flex items-center justify-center min-h-screen w-full">
+        <div className="flex items-center justify-center min-h-screen w-full bg-slate-400 rounded-md">
             <form className="flex flex-col gap-5 md:p-8 w-full max-w-md rounded-lg mx-4">
                 <div className="text-center">
                     <h1 className=" font-extrabold text-2xl mb-2">Forgot Password</h1>

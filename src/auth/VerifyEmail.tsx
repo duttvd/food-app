@@ -2,12 +2,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"; // Ensure Button is imported
 import { Loader2 } from "lucide-react";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 const VerifyEmail = () => {
     const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
     const inputRef = useRef<any[]>([]);
-    const navigate = useNavigate();
+
     const loading = false;
 
     const handleChange = (idx: number, value: string) => {
@@ -22,7 +22,7 @@ const VerifyEmail = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen">
+        <div className="flex items-center justify-center h-screen w-screen bg-slate-400 rounded-md">
             <div className="p-8 rounded-md w-full max-w-md flex flex-col gap-10 border border-gray-200">
                 <div className="text-center">
                     <h1 className="font-extrabold text-2xl">Verify your Email</h1>

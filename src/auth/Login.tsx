@@ -26,7 +26,7 @@ const Login = () => {
 
   const loginSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
-    const result = userLoginSchema.safeParse(input); // Fixed: Validate the `input` state
+    const result = userLoginSchema.safeParse(input);
     if (!result.success) {
       const fieldErrors = result.error.formErrors.fieldErrors;
       setErrors(fieldErrors as Partial<LoginInputState>);
@@ -38,13 +38,13 @@ const Login = () => {
   const loading = false;
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-slate-400 rounded-md">
       <form
         onSubmit={loginSubmitHandler}
         className="md:p-8 w-full h-full max-w-md rounded-lg md:border border-gray-200 mx-4"
       >
-        <div className="md-4">
-          <h1 className="font-bold text-2xl">PateEats</h1>
+        <div className="md-4 justify-center">
+          <h1 className="font-bold text-2xl justify-center">PatelEats</h1>
         </div>
         <div className="mb-4">
           <div className="relative">

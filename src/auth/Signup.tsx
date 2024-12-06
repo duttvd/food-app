@@ -35,13 +35,13 @@ const Signup = () => {
   const loading = false;
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-slate-400 rounded-md">
       <form
         onSubmit={signupSubmitHandler}
         className="md:p-8 w-full h-full max-w-md rounded-lg md:border border-gray-200 mx-4"
       >
         <div className="md-4">
-          <h1 className="font-bold text-2xl">PateEats</h1>
+          <h1 className="font-bold text-2xl">PatelEats</h1>
         </div>
 
 
@@ -133,9 +133,7 @@ const Signup = () => {
         <Separator />
         <p className="mt-2">
           Already have an account?{" "}
-          <Link to="/signup" className="text-blue-500">
-            Login
-          </Link>
+          <Link to="/login" className="text-blue-500">Login</Link>
         </p>
       </form>
     </div>
