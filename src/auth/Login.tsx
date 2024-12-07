@@ -38,7 +38,7 @@ const Login = () => {
   const loading = false;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-400 rounded-md">
+    <div className="flex items-center justify-center min-h-screen">
       <form
         onSubmit={loginSubmitHandler}
         className="md:p-8 w-full h-full max-w-md rounded-lg md:border border-gray-200 mx-4"
