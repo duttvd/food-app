@@ -2,12 +2,11 @@ import { Link } from "react-router-dom"
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "./ui/menubar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { HandPlatter, Loader2, Menu, Moon, PackageCheck, ShoppingCart, Square, SquareMenu, Sun, User, UtensilsCrossed } from "lucide-react";
+import { HandPlatter, Loader2, Menu, Moon, PackageCheck, ShoppingCart, SquareMenu, Sun, User, UtensilsCrossed } from "lucide-react";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+
 import { Separator } from "./ui/separator";
 
 
@@ -20,11 +19,11 @@ const Navbar = () => {
                 <Link to="/">
                     <h1 className=" font-bold md:font-extrabold text-2xl">Vishnu dutt</h1>
                 </Link>
-                <div className="hidden md:flex items-center  gap-10">
+                <div className="hidden  md:flex items-center  gap-10 ">
                     <div className=" hidden md:flex items-center gap-6">
-                        <Link to="/">Home</Link>
-                        <Link to="/profile">Profile</Link>
-                        <Link to="/order/status"> Order</Link>
+                        <Link to="/" className="hover:bg-slate-200 rounded-lg">Home</Link>
+                        <Link to="/profile" className="hover:bg-slate-200 rounded-lg">Profile</Link>
+                        <Link to="/order/status" className="hover:bg-slate-200 rounded-lg"> Order</Link>
 
                         {
                             admin && (
@@ -94,7 +93,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="md:hidden lg:hidden">
                     <MobileNavbar />
 
                 </div>
@@ -105,6 +104,7 @@ const Navbar = () => {
 
 export default Navbar
 const MobileNavbar = () => {
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -151,13 +151,25 @@ const MobileNavbar = () => {
                     />
                         <span>Restaurent</span>
                     </Link>
-                    <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><PackageCheck />
+                    <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><PackageCheck
+                    />
                         <span>Restaurant Order</span>
                     </Link>
-
                 </SheetDescription>
+                <SheetFooter className=" flex flex-col gap-4">
 
-                <SheetFooter>
+                    <>
+                        <div className="flex flex-row items-center gap-2">
+                            <Avatar>
+                                <AvatarImage />
+                                <AvatarFallback>
+                                    CN
+                                </AvatarFallback>
+                            </Avatar>
+                            <h1 className=" font-bold">Vishnu dutt</h1>
+                        </div>
+                    </>
+
                     <SheetClose asChild>
                         <Button type="submit" className=" bg-orange hover:bg-slate-600">Logout</Button>
                     </SheetClose>
