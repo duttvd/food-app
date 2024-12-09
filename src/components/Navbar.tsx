@@ -86,7 +86,7 @@ const Navbar = () => {
                                         <Loader2 className=" ml-7 h-4 w-4 animate-spin" />
                                     </button>
                                 ) : (
-                                    <button className=" bg-orange hover:bg-red-300 text-white rounded-md">Logout </button>
+                                    <button className=" bg-orange rounded-sm text-white hover:bg-slate-600 px-4 py-2">Logout </button>
                                 )
                             }
 
