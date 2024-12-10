@@ -29,7 +29,7 @@ const HereSection = () => {
                         className="pl-10 shadow-lg"
                     />
                     <Search className="text-gray-500 absolute inset-y-2 left-2" />
-                    <Button onClick={() => navigate(`/search/${searchText}`)} className="bg-orange hover:bg-hoverOrange">Search</Button>
+                    <Button onClick={() => navigate(`/search/${searchText}`)} className="bg-orange hover:bg-slate-700">Search</Button>
                 </div>
             </div>
             <div>
