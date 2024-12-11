@@ -44,7 +44,7 @@ const VerifyEmail = () => {
                             />
                         ))}
                     </div>
-                    <Button disabled className="bg-orange hover:bg-hoverOrange mt-6 w-full" disabled={loading}>
+                    <Button disabled className="bg-orange hover:bg-hoverOrange mt-6 w-full">
                         {loading ? (
                             <>
                                 <Loader2 className="mr-2 w-4 h-4 animate-spin" />
