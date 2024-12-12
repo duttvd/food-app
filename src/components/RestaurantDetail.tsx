@@ -1,6 +1,6 @@
 import { Timer } from 'lucide-react'
-
 import { Badge } from './ui/badge'
+import AvailableMenu from './AvailableMenu'
 const RestaurantDetail = () => {
     return (
         <div className="max-w-6xl mx-auto my-10">
@@ -33,7 +33,7 @@ const RestaurantDetail = () => {
                     </div>
 
                 </div>
-
+                <AvailableMenu />
             </div>
         </div>
     )
