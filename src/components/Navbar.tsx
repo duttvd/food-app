@@ -36,7 +36,7 @@ const Navbar = () => {
                                             <Link to="/admin/restaurent">
                                                 <MenubarItem>Restaurent</MenubarItem>
                                             </Link>
-                                            <Link to="/admin/Menu">
+                                            <Link to="/admin/menu">
                                                 <MenubarItem>Menu</MenubarItem>
                                             </Link>
                                             <Link to="/admin/order">
@@ -144,7 +144,7 @@ const MobileNavbar = () => {
                     <Link to="/cart" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><ShoppingCart />
                         <span>Cart(0)</span>
                     </Link>
-                    <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><SquareMenu />
+                    <Link to="/admin/menu" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><SquareMenu />
                         <span>Menu</span>
                     </Link>
                     <Link to="/admin/restaurant" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><UtensilsCrossed
