@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Globe, Link, MapPin, X } from "lucide-react";
+import { Globe, MapPin, X } from "lucide-react";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Bargar from "../assets/bargar.jpg";
@@ -89,6 +89,7 @@ const SearchPage = () => {
                                     </CardFooter>
 
                                 </Card>
+
                             ))
                         }
 
@@ -137,21 +138,21 @@ export default SearchPage;
 //         </>
 //     );
 // };
-const NoResultFound = ({ searchText }: { searchText: string }) => {
-    return (
-        <div className="text-center">
-            <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                No results found
-            </h1>
-            <p className="mt-2 text-gray-500 dark:text-gray-400">
-                We couldn't find any results for "{searchText}". <br /> Try searching
-                with a different term.
-            </p>
-            <Link to="/">
-                <Button className="mt-4 bg-orange hover:bg-orangeHover">
-                    Go Back to Home
-                </Button>
-            </Link>
-        </div>
-    );
-};
+// const NoResultFound = ({ searchText }: { searchText: string }) => {
+//     return (
+//         <div className="text-center">
+//             <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
+//                 No results found
+//             </h1>
+//             <p className="mt-2 text-gray-500 dark:text-gray-400">
+//                 We couldn't find any results for "{searchText}". <br /> Try searching
+//                 with a different term.
+//             </p>
+//             <Link to="/">
+//                 <Button className="mt-4 bg-orange hover:bg-orangeHover">
+//                     Go Back to Home
+//                 </Button>
+//             </Link>
+//         </div>
+//     );
+// };

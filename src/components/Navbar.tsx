@@ -69,7 +69,7 @@ const Navbar = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
-                        <Link to="/card" className="relative cursor-pointer">
+                        <Link to="/cart" className="relative cursor-pointer">
                             <ShoppingCart />
                             <Button size={'icon'} className="absolute -inset-y-3 left-2 text-xs rounded-full h-4 w-4 bg-red-500 hover:bg-gray-500">5</Button>
                         </Link>
@@ -141,13 +141,13 @@ const MobileNavbar = () => {
                     <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><HandPlatter />
                         <span>Order</span>
                     </Link>
-                    <Link to="/card" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><ShoppingCart />
+                    <Link to="/cart" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><ShoppingCart />
                         <span>Cart(0)</span>
                     </Link>
                     <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><SquareMenu />
                         <span>Menu</span>
                     </Link>
-                    <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><UtensilsCrossed
+                    <Link to="/admin/restaurant" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><UtensilsCrossed
                     />
                         <span>Restaurent</span>
                     </Link>

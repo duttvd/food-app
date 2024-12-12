@@ -6,7 +6,7 @@ import CheckoutConfirmPage from "./CheckoutConfirmPage"
 import { useState } from "react"
 
 
-const Card = () => {
+const Cart = () => {
     const [open, setOpen] = useState<boolean>(false);
     return (
         <div className=" flex flex-col max-w-7xl mx-auto my-10">
@@ -64,4 +64,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default Cart
