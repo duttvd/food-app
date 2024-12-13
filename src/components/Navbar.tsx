@@ -33,7 +33,7 @@ const Navbar = () => {
                                             Dashboard
                                         </MenubarTrigger>
                                         <MenubarContent>
-                                            <Link to="/admin/restaurent">
+                                            <Link to="/admin/restaurant">
                                                 <MenubarItem>Restaurent</MenubarItem>
                                             </Link>
                                             <Link to="/admin/menu">
@@ -138,7 +138,7 @@ const MobileNavbar = () => {
                     <Link to="/profile" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><User />
                         <span>Profile</span>
                     </Link>
-                    <Link to="/order" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><HandPlatter />
+                    <Link to="/order/status" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><HandPlatter />
                         <span>Order</span>
                     </Link>
                     <Link to="/cart" className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"><ShoppingCart />
