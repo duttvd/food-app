@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Plus } from "lucide-react";
 import { FormEvent, useState } from "react";
 import EditMenu from "./EditMenu";
+import { MenuFormSchema, menuSchema } from "@/schema/MenuSchema";
 
 const menus = [
     {
@@ -33,18 +34,26 @@ const menus = [
         price: "90",
         image: "https://i.ytimg.com/vi/y3dQ1fSv3xc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLASLdcqi8-qiyqruktqURhKcoiWFQ",
     },
+    {
+        title: "Kaju Katli",
+        description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        price: "110",
+        image: "https://images.healthshots.com/healthshots/en/uploads/2024/10/30172142/kaju-katli-sweets.jpg",
+    },
 ];
 
 const AddMenu = () => {
-    const [input, setInput] = useState<any>({
+    const [input, setInput] = useState<MenuFormSchema>({
         title: "",
         description: "",
         price: "0",
         image: undefined,
     });
-    const [open, setOpen] = useState<Boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [editOpen, setEditOpen] = useState<boolean>(false);
     const [selectedMenu, setSelectedMenu] = useState<any>();
     const loading = false;
+    const [error, setErrors] = useState<Partial<MenuFormSchema>>({});
 
     const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type } = e.target;
@@ -59,8 +68,15 @@ const AddMenu = () => {
     const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(input);
-    };
+        const result = menuSchema.safeParse(input);
+        if (!result.success) {
+            const fieldErrors = result.error.formErrors.fieldErrors;
+            setErrors(fieldErrors as Partial<MenuFormSchema>);
+            return;
 
+        }
+    };
+    // api start from hare
     return (
         <div className="max-w-6xl mx-auto my-10">
             <div className="flex justify-between">
@@ -92,6 +108,7 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter Menu Name"
                                 />
+                                {error && <span className="text-xs text-red-800 font-medium">{error.name}</span>}
                             </div>
                             <div>
                                 <Label>Description</Label>
@@ -102,6 +119,7 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter Menu Description"
                                 />
+                                {error && <span className="text-xs text-red-800 font-medium">{error.description}</span>}
                             </div>
                             <div>
                                 <Label>Price in (Rupees)</Label>
@@ -112,6 +130,7 @@ const AddMenu = () => {
                                     onChange={changeEventHandler}
                                     placeholder="Enter Menu Price"
                                 />
+                                {error && <span className="text-xs text-red-800 font-medium">{error.price}</span>}
                             </div>
                             <div>
                                 <Label>Upload Menu Image</Label>
@@ -120,6 +139,7 @@ const AddMenu = () => {
                                     name="image"
                                     onChange={fileChangeHandler}
                                 />
+                                {error && <span className="text-xs text-red-800 font-medium">{error.image?.name}</span>}
                             </div>
                             <DialogFooter className="mt-5">
                                 {loading ? (
@@ -138,7 +158,7 @@ const AddMenu = () => {
                 </Dialog>
             </div>
             <div className="mt-6 space-y-4">
-                {menus.map((menu: any, index: number) => (
+                {menus.map((menu, index) => (
                     <div
                         key={index}
                         className="flex flex-col md:flex-row md:items-center md:space-x-4 md:p-4 p-2 shadow-lg border"
@@ -146,7 +166,7 @@ const AddMenu = () => {
                         <img
                             src={menu.image}
                             alt=""
-                            className="md:h-24 md:w-24 h-16 w-full object-cover rounded-lg"
+                            className="md:h-32 md:w-40 h-28 w-full object-cover rounded-xl"
                         />
                         <div className="flex-1">
                             <h1 className="font-bold text-lg">{menu.title}</h1>
@@ -159,7 +179,10 @@ const AddMenu = () => {
                             </h2>
                         </div>
                         <Button
-                            onClick={() => setSelectedMenu(menu)}
+                            onClick={() => {
+                                setSelectedMenu(menu);
+                                setEditOpen(true);
+                            }}
                             className="bg-orange hover:bg-slate-600 mt-4"
                         >
                             Edit
@@ -167,7 +190,7 @@ const AddMenu = () => {
                     </div>
                 ))}
             </div>
-            <EditMenu selectedMenu={selectedMenu} />
+            <EditMenu selectedMenu={selectedMenu} editOpen={editOpen} setEditOpen={setEditOpen} />
         </div>
     );
 };
