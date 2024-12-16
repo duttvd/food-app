@@ -10,7 +10,11 @@ import MainLayout from "./Layout/MainLayout";
 import Profile from "./components/Profile";
 import SearchPage from "./components/SearchPage";
 import RestaurantDetail from "./components/RestaurantDetail";
-import Card from "./components/Card";
+import Cart from "./components/Cart";
+import Restaurant from "../src/admin/Restaurant";
+import AddMenu from "./admin/AddMenu";
+import Order from "./admin/Order";
+import Success from "./components/Success";
 
 const appRouter = createBrowserRouter([
   {
@@ -34,8 +38,24 @@ const appRouter = createBrowserRouter([
         element: <RestaurantDetail />,
       },
       {
-        path: "/card",
-        element: <Card />,
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/order/status",
+        element: <Success />,
+      },
+      {
+        path: "/admin/restaurant",
+        element: <Restaurant />,
+      },
+      {
+        path: "/admin/menu",
+        element: <AddMenu />,
+      },
+      {
+        path: "/admin/order",
+        element: <Order />,
       },
     ],
   },

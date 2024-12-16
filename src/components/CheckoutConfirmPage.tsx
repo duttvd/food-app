@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle } f
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { log } from "console";
+
 
 const CheckoutConfirmPage = ({
     open,
@@ -36,7 +36,7 @@ const CheckoutConfirmPage = ({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent>
-                <DialogTitle>
+                <DialogTitle className="font-bold">
                     Rebiew your Order</DialogTitle>
                 <DialogDescription className="text-xs"> Double-check your delivery details and ensure everything is in order.
                     When you are ready, hit confirm button to finalize your order</DialogDescription>
