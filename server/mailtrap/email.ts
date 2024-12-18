@@ -43,7 +43,7 @@ export const sendPasswordResetEmail = async (email: string, resetURL: string) =>
     const recipient = [{ email }];
     const htmlcontent = generatePasswordResetEmailHtml(resetURL);
     try {
-        const re = await client.send({
+        const res = await client.send({
             from: sender,
             to: recipient,
             subject: 'Reset your password',

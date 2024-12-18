@@ -1,14 +1,16 @@
 import express from "express";
 import { checkAuth, forgotPassword, login, logout, resetpassword, signup, updateProfile, verifyemail } from "../controller/user.controller";
-import { isAuthenticated } from "../middlewares/isAuthenticated"; // Fixed spelling
+import { isAuthenticated } from "../middlewares/isAuthenticated";
 
 const router = express.Router();
 
-router.route("/check-auth").get(isAuthenticated, checkAuth); // Fixed spelling
-router.route("/signup").post(signup); // Imported signup
+router.route("/check-auth").get(isAuthenticated, checkAuth);
+router.route("/signup").post(signup);
 router.route("/login").post(login);
-router.route("/logout").post(logout); // Fixed typo in route
-router.route("/verify-email").post(verifyemail);
+router.route("/logout").post(logout);
+router.route("/verify-email").post(verifyEmail);
 router.route("/forgot-password").post(forgotPassword);
-router.route("/reset-password/:token").post(resetpassword);
-router.route("/profile/update").put(isAuthenticated, updateProfile); // Fixed spelling
+router.route("/reset-password/:token").post(resetPassword);
+router.route("/profile/update").put(isAuthenticated, updateProfile);
+
+export default router;
