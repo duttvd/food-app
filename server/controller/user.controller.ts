@@ -83,7 +83,7 @@ export const login = async (req: Request, res: Response) => {
     }
 };
 
-export const verifyemail = async (req: Request, res: Response) => {
+export const verifyEmail = async (req: Request, res: Response) => {
     try {
         const { verificationCode } = req.body;
         const user = await User.findOne({

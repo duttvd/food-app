@@ -1,10 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./connectDB";
-import userRoute from "./routes/user.Route";
+
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import userRoute from "./routes/user.Route";
+import restaurant from "./routes/restaurant.route";
 
 
 dotenv.config();
@@ -25,6 +27,9 @@ const corsOptions = {
   credential: true
 }
 app.use(cors(corsOptions))
+// api
+app.use("/api/v1/user");
+app.use("/api/v1/restaurant");
 
 app.listen(PORT, () => {
   connectDb();
