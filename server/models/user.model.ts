@@ -7,20 +7,20 @@ interface IUser {
     country: string;
     address: string;
     city: string;
-    contact: string; // Fixed: "contect" → "contact"
+    contact: string;
     profilePicture: string;
     admin: boolean;
-    lastLogin?: Date; // Fixed: "lastlogin" → "lastLogin"
-    isVerified?: boolean; // Fixed: "isVeryFied" → "isVerified"
-    resetPasswordToken?: string; // Fixed: "resetPosswordTokin" → "resetPasswordToken"
-    resetPasswordTokenExpiresAt?: Date; // Fixed: "resetPosswordTokinExpiresAt" → "resetPasswordTokenExpiresAt"
-    verificationToken?: string; // Fixed: "veryficationTokin" → "verificationToken"
-    verificationTokenExpiresAt?: Date; // Fixed: "veryficationTokinEcpiresAt" → "verificationTokenExpiresAt"
+    lastLogin?: Date;
+    isVerified?: boolean;
+    resetPasswordToken?: string;
+    resetPasswordTokenExpiresAt?: Date;
+    verificationToken?: string;
+    verificationTokenExpiresAt?: Date;
 }
 
 export interface IUserDocument extends IUser, Document {
     createdAt: Date;
-    updatedAt: Date; // Fixed: "updateAt" → "updatedAt"
+    updatedAt: Date;
 }
 
 const userSchema = new mongoose.Schema<IUserDocument>(
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema<IUserDocument>(
             type: String,
             required: true,
         },
-        contact: { // Fixed: "contect" → "contact"
+        contact: {
             type: String,
             required: true,
         },
@@ -62,18 +62,18 @@ const userSchema = new mongoose.Schema<IUserDocument>(
             default: false
         },
         // Advanced authentication
-        lastLogin: { // Fixed: "lastlogin" → "lastLogin"
+        lastLogin: {
             type: Date,
             default: Date.now,
         },
-        isVerified: { // Fixed: "isVeryFied" → "isVerified"
+        isVerified: {
             type: Boolean,
             default: false,
         },
-        resetPasswordToken: String, // Fixed: "resetPosswordTokin" → "resetPasswordToken"
-        resetPasswordTokenExpiresAt: Date, // Fixed: "resetPosswordTokinExpiresAt" → "resetPasswordTokenExpiresAt"
-        verificationToken: String, // Fixed: "veryficationTokin" → "verificationToken"
-        verificationTokenExpiresAt: Date, // Fixed: "veryficationTokinEcpiresAt" → "verificationTokenExpiresAt"
+        resetPasswordToken: String,
+        resetPasswordTokenExpiresAt: Date,
+        verificationToken: String,
+        verificationTokenExpiresAt: Date,
     },
     { timestamps: true }
 );

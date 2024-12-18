@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import cloudinary from "../utils/cloudinary";
+import { generateVerificationCode } from "../utils/generateVerificationCode";
+import { generateToken } from "../utils/generateToken";
+import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
+
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -15,7 +21,7 @@ export const signup = async (req: Request, res: Response) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const verificationToken = "vishnu";
+        const verificationToken = generateVerificationCode();
 
         user = await User.create({
             fullname,
@@ -26,9 +32,9 @@ export const signup = async (req: Request, res: Response) => {
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
         });
 
-        // generateToken(res, user);
+        generateToken(res, user);
 
-        // await sendVerificationEmail(email, verificationToken);
+        await sendVerificationEmail(email, verificationToken);
 
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(201).json({
@@ -61,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
             });
         }
 
-        // generateToken(res, user);
+        generateToken(res, user);
         user.lastLogin = new Date();
         await user.save();
 
@@ -97,7 +103,7 @@ export const verifyemail = async (req: Request, res: Response) => {
         user.verificationTokenExpiresAt = undefined;
         await user.save();
 
-        // sendWelcomeEmail(user.email, user.fullname);
+        sendWelcomeEmail(user.email, user.fullname);
 
         return res.status(200).json({
             success: true,
@@ -110,7 +116,7 @@ export const verifyemail = async (req: Request, res: Response) => {
     }
 };
 
-export const logout = async (req: Request, res: Response) => {
+export const logout = async (_: Request, res: Response) => {
     try {
         return res.clearCookie("token").status(200).json({
             success: true,
@@ -130,11 +136,103 @@ export const forgotPassword = async (req: Request, res: Response) => {
             return res.status(400).json({
                 success: false,
                 message: "User doesn't exist"
-            })
+            });
         }
+        const resetToken = crypto.randomBytes(40).toString('hex');
+        const resetTokenExpiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000);
 
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordTokenExpiresAt = resetTokenExpiresAt;
+        await user.save();
+
+        // send email.
+        await sendPasswordResetEmail(user.email, `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`);
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset link sent to your email"
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+export const resetpassword = async (req: Request, res: Response) => {
+    try {
+        const { token } = req.params; // Token from URL params
+        const { newPassword } = req.body; // New password from request body
+
+        // User ko find karo based on token and expiry time
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordTokenExpiresAt: { $gt: Date.now() }
+        });
+
+        // Agar user nahi mila to error bhejo
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid or expired token"
+            });
+        }
+
+        // Password hash karo aur user ko update karo
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordTokenExpiresAt = undefined;
+        await user.save();
+
+        //  send success reset email
+        await sendResetSuccessEmail(user.email);
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully"
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+export const checkAuth = async (req: Request, res: Response) => {
+    try {
+        const userId = req.id;
+        const user = await User.findById(userId).select("-password");
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "user not found"
+            });
+        };
+        return res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+export const updateProfile = async (req: Request, res: Response) => {
+    try {
+        const userId = req.id;
+        const { fullname, email, address, city, country, profilePicture } = req.body;
+        // uplosd image on cloudinary
+        let cloudResponse: any;
+        cloudResponse = await cloudinary.uploader.upload(profilePicture);
+        const updateData = { fullname, email, address, city, country, profilePicture }
+
+        const user = await User.findByIdAndUpdate(userId, updateData, { new: true }).select("-password");
+
+        return res.status(200).json({
+            success: true,
+            user,
+            message: "profile updated successfully"
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
