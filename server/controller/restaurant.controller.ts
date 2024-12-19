@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { Restaurant } from "../models/restauranet.model";
+import { Restaurant } from "../models/restaurant.model";
 import { Multer } from "multer";
 import uploadImageOnCloudinary from "../utils/imageUpload";
 import { Order } from "../models/order.model";
 
 export const createRestaurant = async (req: Request, res: Response) => {
     try {
-        const { restaurantName, city, country, price, deliveryTame, cuisines } = req.body;
+        const { restaurantName, city, country, deliveryTime, cuisines } = req.body;
         const file = req.file;
 
 
@@ -14,7 +14,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
         if (restaurant) {
             return res.status(400).json({
                 success: false,
-                message: "Restaurant already exist for this user"
+                message: "Restaurant already exists for this user"
             })
         }
         if (!file) {
@@ -29,7 +29,7 @@ export const createRestaurant = async (req: Request, res: Response) => {
             restaurantName,
             city,
             country,
-            deliveryTame,
+            deliveryTime,
             cuisines: JSON.parse(cuisines),
             imageUrl,
 
