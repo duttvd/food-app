@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
@@ -7,7 +7,7 @@ import { generateVerificationCode } from "../utils/generateVerificationCode";
 import { generateToken } from "../utils/generateToken";
 import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/email";
 
-export const signup = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
         const { fullname, email, password, contact } = req.body;
 
@@ -44,7 +44,7 @@ export const signup = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 };
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<any> => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -77,7 +77,7 @@ export const login = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 }
-export const verifyEmail = async (req: Request, res: Response) => {
+export const verifyEmail = async (req: Request, res: Response): Promise<any> => {
     try {
         const { verificationCode } = req.body;
 
@@ -107,7 +107,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 }
-export const logout = async (_: Request, res: Response) => {
+export const logout = async (_: Request, res: Response): Promise<any> => {
     try {
         return res.clearCookie("token").status(200).json({
             success: true,
@@ -118,7 +118,7 @@ export const logout = async (_: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" })
     }
 };
-export const forgotPassword = async (req: Request, res: Response) => {
+export const forgotPassword = async (req: Request, res: Response): Promise<any> => {
     try {
         const { email } = req.body;
         const user = await User.findOne({ email });
@@ -149,7 +149,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
-export const resetPassword = async (req: Request, res: Response) => {
+export const resetPassword = async (req: Request, res: Response): Promise<any> => {
     try {
         const { token } = req.params;
         const { newPassword } = req.body;
@@ -179,7 +179,7 @@ export const resetPassword = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 }
-export const checkAuth = async (req: Request, res: Response) => {
+export const checkAuth = async (req: Request, res: Response): Promise<any> => {
     try {
         const userId = req.id;
         const user = await User.findById(userId).select("-password");
@@ -198,7 +198,7 @@ export const checkAuth = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
-export const updateProfile = async (req: Request, res: Response) => {
+export const updateProfile = async (req: Request, res: Response): Promise<any> => {
     try {
         const userId = req.id;
         const { fullname, email, address, city, country, profilePicture } = req.body;
