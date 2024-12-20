@@ -23,7 +23,7 @@ type CheckoutSessionRequest = {
 }
 
 
-export const getOrders = async (req: Request, res: Response) => {
+export const getOrders = async (req: Request, res: Response): Promise<any> => {
     try {
         const orders = await Order.find({ user: req.id }).populate('user').populate('restaurant');
         return res.status(200).json({
@@ -36,7 +36,7 @@ export const getOrders = async (req: Request, res: Response) => {
     }
 }
 
-export const createCheckoutSession = async (req: Request, res: Response) => {
+export const createCheckoutSession = async (req: Request, res: Response): Promise<any> => {
     try {
         const checkoutSessionRequest: CheckoutSessionRequest = req.body;
         const restaurant = await Restaurant.findById(checkoutSessionRequest.restaurantId).populate('menus');
