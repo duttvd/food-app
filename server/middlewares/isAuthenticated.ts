@@ -27,6 +27,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
                 success: false,
                 message: "Invalid token"
             })
+            return
         }
         req.id = decode.userId;
         next();
