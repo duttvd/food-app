@@ -7,7 +7,7 @@ export interface IRestaurant {
     deliveryTime: number;
     cuisines: string[];
     imageUrl: string;
-    menus: mongoose.Schema.Types.ObjectId;
+    menus: mongoose.Schema.Types.ObjectId[];
 }
 export interface IRestaurantDocument extends IRestaurant, Document {
     createdAt: Date;
@@ -38,7 +38,11 @@ const restaurantShema = new mongoose.Schema<IRestaurantDocument>({
     },
     cuisines: [{ type: String, required: true }],
 
-    menus: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Menu' }],
+    menus: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Menu',
+        default: []
+    },
 
 
     imageUrl: {

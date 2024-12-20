@@ -58,7 +58,7 @@ export const createCheckoutSession = async (req: Request, res: Response): Promis
         const menuItems = restaurant.menus;
         const lineItems = createLineItems(checkoutSessionRequest, menuItems);
 
-        const session = await Stripe.Checkout.Sessions.create({
+        const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             shipping_address_collection: {
                 allowed_countries: ['GB', 'US', 'CA']
