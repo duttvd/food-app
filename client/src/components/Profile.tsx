@@ -74,7 +74,7 @@ const Profile = () => {
                     />
                 </div>
             </div>
-            <div className="grid md:grid-cols-4 md:gap-2 gap-3 my-10">
+            <div className="grid md:grid-cols-4 md:gap-2 gap-3 my-10 dark:text-black">
                 <div className="flex items-center gap-4 rounded-sm p-2 bg-gray-200">
                     <Mail className="text-gray-500" />
                     <div className="w-full">

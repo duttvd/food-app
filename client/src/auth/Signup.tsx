@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { SignupInputState, userSignupSchema } from "@/schema/UserSchema";
+import { useUserStore } from "@/store/useUserSrore";
 import { Loader2, LockKeyhole, Mail, PhoneCall, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
@@ -15,13 +16,14 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState<Partial<SignupInputState>>({});
+  const { signup } = useUserStore();
 
   const changeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const signupSubmitHandler = (e: FormEvent) => {
+  const signupSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     const result = userSignupSchema.safeParse(input);
     if (!result.success) {
@@ -29,7 +31,8 @@ const Signup = () => {
       setErrors(fieldErrors as Partial<SignupInputState>);
       return;
     }
-    console.log(input);
+    // api imlementation
+    await signup(input);
   };
 
   const loading = false;
