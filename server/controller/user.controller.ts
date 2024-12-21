@@ -29,9 +29,10 @@ export const signup = async (req: Request, res: Response, next: NextFunction): P
             verificationToken,
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
         })
-        generateToken(res, user);
+        // generateToken(res, user);
+        console.log("Verification Token:", verificationToken);
 
-        await sendVerificationEmail(email, verificationToken);
+        // await sendVerificationEmail(email, verificationToken);
 
         const userWithoutPassword = await User.findOne({ email }).select("-password");
         return res.status(201).json({
@@ -95,7 +96,7 @@ export const verifyEmail = async (req: Request, res: Response): Promise<any> => 
         await user.save();
 
         // send welcome email
-        await sendWelcomeEmail(user.email, user.fullname);
+        // await sendWelcomeEmail(user.email, user.fullname);
 
         return res.status(200).json({
             success: true,
